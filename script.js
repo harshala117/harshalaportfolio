@@ -22,37 +22,7 @@ navLinks.querySelectorAll('a').forEach(link => {
   });
 });
 
-/* ── TYPEWRITER ── */
-const roles = [
-  'Software Engineer',
-  'Cloud Architect',
-  'Full Stack Developer',
-  'AI/ML Engineer',
-];
-let ri = 0, ci = 0, deleting = false;
-const typedEl = document.getElementById('typed-text');
 
-function type() {
-  const word = roles[ri];
-  if (!deleting) {
-    typedEl.textContent = word.slice(0, ci + 1);
-    ci++;
-    if (ci === word.length) {
-      deleting = true;
-      setTimeout(type, 1800);
-      return;
-    }
-  } else {
-    typedEl.textContent = word.slice(0, ci - 1);
-    ci--;
-    if (ci === 0) {
-      deleting = false;
-      ri = (ri + 1) % roles.length;
-    }
-  }
-  setTimeout(type, deleting ? 48 : 88);
-}
-type();
 
 /* ── FLOATING PARTICLES ── */
 const pc = document.getElementById('particles');
