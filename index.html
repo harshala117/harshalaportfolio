@@ -1,17 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Harshala Pawar — Software Engineer</title>
-
-<!-- ============================================================
-  HARSHALA PAWAR — PORTFOLIO
-  Save this file as index.html and push to your GitHub repo.
-  Repo name: yourusername.github.io → live at https://yourusername.github.io
-  Update LinkedIn/GitHub URLs with your actual handles before deploying.
-============================================================ -->
-
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Harshala Pawar — Software Engineer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -19,31 +14,32 @@
 <div id="cursor-glow"></div>
 <div id="particles"></div>
 
-<!-- ══════════════════
-     NAV
-══════════════════ -->
-<nav>
-  <ul class="nav-links">
+<!-- NAV -->
+<nav id="navbar">
+  <div class="nav-logo">HP</div>
+  <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">
+    <span></span><span></span><span></span>
+  </button>
+  <ul class="nav-links" id="navLinks">
     <li><a href="#about">About</a></li>
+    <li><a href="#skills">Skills</a></li>
     <li><a href="#experience">Experience</a></li>
     <li><a href="#projects">Projects</a></li>
     <li><a href="#certs">Certifications</a></li>
+    <li><a href="#education">Education</a></li>
     <li><a href="#contact">Contact</a></li>
   </ul>
   <div class="nav-status">
     <div class="status-dot"></div>
-    Open to opportunities
+    <span>Open to opportunities</span>
   </div>
 </nav>
 
-<!-- ══════════════════
-     HERO
-══════════════════ -->
+<!-- HERO -->
 <section id="hero">
   <div class="hero-inner">
-
     <div class="hero-tag">
-      <span style="color:var(--teal)">▸</span>
+      <span class="tag-arrow">▸</span>
       Full Stack · Cloud · AI/ML
     </div>
 
@@ -68,20 +64,20 @@
     </div>
 
     <div class="hero-stats">
-      <div>
-        <div class="stat-num">1<span>+</span></div>
+      <div class="stat-item">
+        <div class="stat-num" data-count="1">1<span>+</span></div>
         <div class="stat-label">Years Experience</div>
       </div>
-      <div>
-        <div class="stat-num">4<span>+</span></div>
+      <div class="stat-item">
+        <div class="stat-num" data-count="4">4<span>+</span></div>
         <div class="stat-label">Cloud Projects</div>
       </div>
-      <div>
-        <div class="stat-num">6<span>+</span></div>
+      <div class="stat-item">
+        <div class="stat-num" data-count="6">6<span>+</span></div>
         <div class="stat-label">Certifications</div>
       </div>
-      <div>
-        <div class="stat-num">50<span>+</span></div>
+      <div class="stat-item">
+        <div class="stat-num" data-count="50">50<span>+</span></div>
         <div class="stat-label">Students Mentored</div>
       </div>
     </div>
@@ -89,106 +85,139 @@
 
   <div class="scroll-hint">
     <div class="scroll-line"></div>
-    scroll to explore
+    <span>scroll to explore</span>
   </div>
 </section>
 
-<!-- ══════════════════
-     ABOUT
-══════════════════ -->
+<!-- ABOUT -->
 <section id="about">
   <div class="section-wrap">
     <div class="section-label">// 01 — About</div>
     <h2 class="section-title"><span class="underline-accent">Background</span></h2>
-
-    <div class="about-grid">
-      <div class="about-text">
-        <p>
-          I'm a <strong>full-stack engineer</strong> with a focus on building scalable
-          cloud-native applications and AI-integrated systems. From designing microservice
-          architectures to deploying serverless pipelines on AWS, I work across the full stack.
-        </p>
-        <p>
-          At Sourcewell, I built production systems using <strong>Java Spring Boot, React, and Angular</strong>,
-          owning delivery end-to-end in Agile environments. I led performance optimizations
-          that reduced latency by 15% and improved system reliability measurably.
-        </p>
-        <p>
-          Currently at <strong>UT Dallas</strong>, I'm deepening expertise in cloud computing,
-          ML systems, and conversational AI — applying this through real projects including
-          RAG pipelines and serverless assistants built on AWS Bedrock.
-        </p>
-        <div class="terminal-line">
-          <span class="prompt">~</span>
-          <span class="path"> /skills</span>
-          <span style="color:var(--dim)"> $ ls -la</span>
-        </div>
-      </div>
-
-      <div class="skill-categories">
-        <div>
-          <div class="skill-cat-label">Backend</div>
-          <div class="skill-tags">
-            <span class="skill-tag hot">Java Spring Boot</span>
-            <span class="skill-tag hot">Python FastAPI</span>
-            <span class="skill-tag">Node.js</span>
-            <span class="skill-tag">REST APIs</span>
-            <span class="skill-tag">Microservices</span>
-            <span class="skill-tag">Serverless</span>
-          </div>
-        </div>
-        <div>
-          <div class="skill-cat-label">Frontend</div>
-          <div class="skill-tags">
-            <span class="skill-tag">React.js</span>
-            <span class="skill-tag">Angular</span>
-            <span class="skill-tag">TypeScript</span>
-            <span class="skill-tag">HTML5 / CSS3</span>
-          </div>
-        </div>
-        <div>
-          <div class="skill-cat-label">Cloud & DevOps</div>
-          <div class="skill-tags">
-            <span class="skill-tag hot">AWS Lambda</span>
-            <span class="skill-tag hot">AWS Bedrock</span>
-            <span class="skill-tag">ECS / EKS</span>
-            <span class="skill-tag">Docker</span>
-            <span class="skill-tag">Kubernetes</span>
-            <span class="skill-tag">Terraform</span>
-            <span class="skill-tag">GitHub Actions</span>
-            <span class="skill-tag">Jenkins</span>
-          </div>
-        </div>
-        <div>
-          <div class="skill-cat-label">AI / ML</div>
-          <div class="skill-tags">
-            <span class="skill-tag hot">RAG Pipelines</span>
-            <span class="skill-tag hot">LangChain</span>
-            <span class="skill-tag">LangGraph</span>
-            <span class="skill-tag">Amazon Bedrock</span>
-            <span class="skill-tag">Embeddings</span>
-          </div>
-        </div>
-        <div>
-          <div class="skill-cat-label">Databases</div>
-          <div class="skill-tags">
-            <span class="skill-tag">PostgreSQL</span>
-            <span class="skill-tag">DynamoDB</span>
-            <span class="skill-tag">MongoDB</span>
-            <span class="skill-tag">MySQL</span>
-          </div>
-        </div>
-      </div>
+    <div class="about-text reveal">
+      <p>
+        I'm a <strong>full-stack engineer</strong> with a focus on building scalable
+        cloud-native applications and AI-integrated systems. From designing microservice
+        architectures to deploying serverless pipelines on AWS, I work across the full stack.
+      </p>
+      <p>
+        At <strong>Sourcewell</strong>, I built production systems using Java Spring Boot, React, and Angular,
+        owning delivery end-to-end in Agile environments. I led performance optimizations
+        that reduced latency by 15% and improved system reliability measurably.
+      </p>
+      <p>
+        Currently at <strong>UT Dallas</strong>, I'm deepening expertise in cloud computing,
+        ML systems, and conversational AI — applying this through real projects including
+        RAG pipelines and serverless assistants built on AWS Bedrock.
+      </p>
     </div>
   </div>
 </section>
 
-<!-- ══════════════════
-     EXPERIENCE
-══════════════════ -->
+<!-- SKILLS -->
+<section id="skills">
+  <div class="section-wrap">
+    <div class="section-label">// 02 — Skills</div>
+    <h2 class="section-title"><span class="underline-accent">Technical Skills</span></h2>
+
+    <div class="skills-grid">
+
+      <div class="skill-block reveal">
+        <div class="skill-block-header">
+          <span class="skill-block-icon">⚙️</span>
+          <span class="skill-block-label">Backend</span>
+        </div>
+        <div class="skill-tags">
+          <span class="skill-tag hot">Java Spring Boot</span>
+          <span class="skill-tag hot">Python FastAPI</span>
+          <span class="skill-tag">Node.js</span>
+          <span class="skill-tag">REST APIs</span>
+          <span class="skill-tag">Microservices</span>
+          <span class="skill-tag">Serverless</span>
+        </div>
+      </div>
+
+      <div class="skill-block reveal">
+        <div class="skill-block-header">
+          <span class="skill-block-icon">🖥️</span>
+          <span class="skill-block-label">Frontend</span>
+        </div>
+        <div class="skill-tags">
+          <span class="skill-tag">React.js</span>
+          <span class="skill-tag">Angular</span>
+          <span class="skill-tag">TypeScript</span>
+          <span class="skill-tag">HTML5 / CSS3</span>
+          <span class="skill-tag">JavaScript</span>
+        </div>
+      </div>
+
+      <div class="skill-block reveal">
+        <div class="skill-block-header">
+          <span class="skill-block-icon">☁️</span>
+          <span class="skill-block-label">Cloud &amp; DevOps</span>
+        </div>
+        <div class="skill-tags">
+          <span class="skill-tag hot">AWS Lambda</span>
+          <span class="skill-tag hot">AWS Bedrock</span>
+          <span class="skill-tag">ECS / EKS</span>
+          <span class="skill-tag">Docker</span>
+          <span class="skill-tag">Kubernetes</span>
+          <span class="skill-tag">Terraform</span>
+          <span class="skill-tag">GitHub Actions</span>
+          <span class="skill-tag">Jenkins</span>
+        </div>
+      </div>
+
+      <div class="skill-block reveal">
+        <div class="skill-block-header">
+          <span class="skill-block-icon">🤖</span>
+          <span class="skill-block-label">AI / ML</span>
+        </div>
+        <div class="skill-tags">
+          <span class="skill-tag hot">RAG Pipelines</span>
+          <span class="skill-tag hot">LangChain</span>
+          <span class="skill-tag">LangGraph</span>
+          <span class="skill-tag">Amazon Bedrock</span>
+          <span class="skill-tag">Embeddings</span>
+          <span class="skill-tag">Llama 3</span>
+        </div>
+      </div>
+
+      <div class="skill-block reveal">
+        <div class="skill-block-header">
+          <span class="skill-block-icon">🗄️</span>
+          <span class="skill-block-label">Databases</span>
+        </div>
+        <div class="skill-tags">
+          <span class="skill-tag">PostgreSQL</span>
+          <span class="skill-tag">DynamoDB</span>
+          <span class="skill-tag">MongoDB</span>
+          <span class="skill-tag">MySQL</span>
+        </div>
+      </div>
+
+      <div class="skill-block reveal">
+        <div class="skill-block-header">
+          <span class="skill-block-icon">🛠️</span>
+          <span class="skill-block-label">Tools &amp; Practices</span>
+        </div>
+        <div class="skill-tags">
+          <span class="skill-tag">Git</span>
+          <span class="skill-tag">Agile / Scrum</span>
+          <span class="skill-tag">CI/CD</span>
+          <span class="skill-tag">Unit Testing</span>
+          <span class="skill-tag">System Design</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
 <section id="experience">
   <div class="section-wrap">
-    <div class="section-label">// 02 — Experience</div>
+    <div class="section-label">// 03 — Experience</div>
     <h2 class="section-title"><span class="underline-accent">Work History</span></h2>
 
     <div class="timeline">
@@ -222,18 +251,16 @@
   </div>
 </section>
 
-<!-- ══════════════════
-     PROJECTS
-══════════════════ -->
+<!-- PROJECTS -->
 <section id="projects">
   <div class="section-wrap">
-    <div class="section-label">// 03 — Projects</div>
+    <div class="section-label">// 04 — Projects</div>
     <h2 class="section-title"><span class="underline-accent">Selected Work</span></h2>
 
     <div class="projects-grid">
 
       <div class="project-card featured">
-        <div>
+        <div class="project-content">
           <div class="project-num">PROJECT 01 · FEATURED · FEB 2026</div>
           <div class="project-title">Intelligent Knowledge AI Agent for Vendor Risk Assessment</div>
           <div class="project-desc">
@@ -255,7 +282,7 @@
         </div>
         <div class="project-visual">
           <div class="rag-visual">
-            <div style="font-family:var(--mono);font-size:10px;color:var(--dim);margin-bottom:12px;letter-spacing:0.1em;">RAG PIPELINE</div>
+            <div class="rag-label">RAG PIPELINE</div>
             <div class="rag-flow">
               <div class="rag-node">Doc<br>Ingest</div>
               <div class="rag-arrow">→</div>
@@ -265,9 +292,7 @@
               <div class="rag-arrow">→</div>
               <div class="rag-node">LLM<br>Output</div>
             </div>
-            <div style="font-family:var(--mono);font-size:10px;color:var(--teal);margin-top:14px;text-align:center;letter-spacing:0.06em;">
-              4 hrs → &lt;10 min review time
-            </div>
+            <div class="rag-stat">4 hrs → &lt;10 min review time</div>
           </div>
         </div>
       </div>
@@ -327,82 +352,94 @@
   </div>
 </section>
 
-<!-- ══════════════════
-     CERTIFICATIONS
-══════════════════ -->
+<!-- CERTIFICATIONS -->
 <section id="certs">
   <div class="section-wrap">
-    <div class="section-label">// 04 — Credentials</div>
+    <div class="section-label">// 05 — Credentials</div>
     <h2 class="section-title"><span class="underline-accent">Certifications</span></h2>
 
     <div class="certs-grid">
       <div class="cert-card">
         <div class="cert-icon">☁️</div>
-        <div><div class="cert-name">AWS Solutions Architect</div><div class="cert-issuer">Amazon Web Services</div></div>
+        <div>
+          <div class="cert-name">AWS Solutions Architect</div>
+          <div class="cert-issuer">Amazon Web Services</div>
+        </div>
       </div>
       <div class="cert-card">
         <div class="cert-icon">🤖</div>
-        <div><div class="cert-name">AWS Machine Learning</div><div class="cert-issuer">Amazon Web Services</div></div>
+        <div>
+          <div class="cert-name">AWS Machine Learning</div>
+          <div class="cert-issuer">Amazon Web Services</div>
+        </div>
       </div>
       <div class="cert-card">
         <div class="cert-icon">✦</div>
-        <div><div class="cert-name">AWS AI Practitioner</div><div class="cert-issuer">Amazon Web Services</div></div>
+        <div>
+          <div class="cert-name">AWS AI Practitioner</div>
+          <div class="cert-issuer">Amazon Web Services</div>
+        </div>
       </div>
       <div class="cert-card">
         <div class="cert-icon">⚙️</div>
-        <div><div class="cert-name">Kubernetes Administrator</div><div class="cert-issuer">Linux Foundation</div></div>
+        <div>
+          <div class="cert-name">Kubernetes Administrator</div>
+          <div class="cert-issuer">Linux Foundation</div>
+        </div>
       </div>
       <div class="cert-card">
         <div class="cert-icon">🐍</div>
-        <div><div class="cert-name">Python for Data Science</div><div class="cert-issuer">Coursera</div></div>
+        <div>
+          <div class="cert-name">Python for Data Science</div>
+          <div class="cert-issuer">Coursera</div>
+        </div>
       </div>
       <div class="cert-card">
         <div class="cert-icon">◈</div>
-        <div><div class="cert-name">UI/UX Certified</div><div class="cert-issuer">Industry Certification</div></div>
+        <div>
+          <div class="cert-name">UI/UX Certified</div>
+          <div class="cert-issuer">Industry Certification</div>
+        </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ══════════════════
-     EDUCATION
-══════════════════ -->
+<!-- EDUCATION -->
 <section id="education">
   <div class="section-wrap">
-    <div class="section-label">// 05 — Education</div>
+    <div class="section-label">// 06 — Education</div>
     <h2 class="section-title"><span class="underline-accent">Academic Background</span></h2>
 
     <div class="edu-grid">
-      <div class="edu-card">
+      <div class="edu-card reveal">
         <div class="edu-degree">Master of Science</div>
-        <div style="font-size:13px;color:var(--muted);margin-bottom:14px;">Information Technology &amp; Management</div>
+        <div class="edu-field">Information Technology &amp; Management</div>
         <div class="edu-school">University of Texas at Dallas</div>
         <div class="edu-meta">Aug 2024 — May 2026 · Dallas, TX</div>
-        <div style="margin-top:14px;font-family:var(--mono);font-size:10px;color:var(--dim);">Cloud Computing · AWS Architecture · AI Systems</div>
+        <div class="edu-topics">Cloud Computing · AWS Architecture · AI Systems</div>
       </div>
-      <div class="edu-card">
+      <div class="edu-card reveal">
         <div class="edu-degree">Bachelor of Computer Applications</div>
-        <div style="font-size:13px;color:var(--muted);margin-bottom:14px;">Computer Science</div>
+        <div class="edu-field">Computer Science</div>
         <div class="edu-school">Amity University, Mumbai</div>
         <div class="edu-meta">Aug 2019 — Aug 2022 · Navi Mumbai, India</div>
-        <div style="margin-top:14px;font-family:var(--mono);font-size:10px;color:var(--dim);">Data Structures · Algorithms · Software Engineering</div>
+        <div class="edu-topics">Data Structures · Algorithms · Software Engineering</div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ══════════════════
-     CONTACT
-══════════════════ -->
+<!-- CONTACT -->
 <section id="contact">
   <div class="section-wrap">
-    <div class="section-label">// 06 — Contact</div>
+    <div class="section-label">// 07 — Contact</div>
     <div class="contact-inner">
-      <div class="contact-heading">
+      <div class="contact-heading reveal">
         <h2>Let's<br><span>work</span><br>together.</h2>
         <p>Open to full-time roles, internships, and interesting projects in cloud engineering, full-stack development, or AI/ML systems.</p>
       </div>
-      <div class="contact-links">
+      <div class="contact-links reveal">
         <a href="mailto:pawarharshala080@gmail.com" class="contact-link">
           <div class="contact-link-icon">✉</div>
           <div>
@@ -436,16 +473,13 @@
   </div>
 </section>
 
-<!-- ══════════════════
-     FOOTER
-══════════════════ -->
+<!-- FOOTER -->
 <footer>
-  <div>© 2025 Harshala Pawar</div>
+  <div>© 2026 Harshala Pawar</div>
   <div>HTML · CSS · JavaScript — GitHub Pages</div>
   <div>Dallas, TX</div>
 </footer>
 
-<!-- ══════════════════════════════════════════════════
-     JAVASCRIPT
-══════════════════════════════════════════════════ -->
 <script src="script.js"></script>
+</body>
+</html>
