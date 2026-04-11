@@ -1,9 +1,25 @@
-
 /* ── CURSOR GLOW ── */
 const glow = document.getElementById('cursor-glow');
 document.addEventListener('mousemove', e => {
   glow.style.left = e.clientX + 'px';
   glow.style.top  = e.clientY + 'px';
+});
+
+/* ── MOBILE NAV TOGGLE ── */
+const navToggle = document.getElementById('navToggle');
+const navLinks  = document.getElementById('navLinks');
+
+navToggle.addEventListener('click', () => {
+  navToggle.classList.toggle('open');
+  navLinks.classList.toggle('open');
+});
+
+// Close mobile nav on link click
+navLinks.querySelectorAll('a').forEach(link => {
+  link.addEventListener('click', () => {
+    navToggle.classList.remove('open');
+    navLinks.classList.remove('open');
+  });
 });
 
 /* ── TYPEWRITER ── */
@@ -21,11 +37,18 @@ function type() {
   if (!deleting) {
     typedEl.textContent = word.slice(0, ci + 1);
     ci++;
-    if (ci === word.length) { deleting = true; setTimeout(type, 1800); return; }
+    if (ci === word.length) {
+      deleting = true;
+      setTimeout(type, 1800);
+      return;
+    }
   } else {
     typedEl.textContent = word.slice(0, ci - 1);
     ci--;
-    if (ci === 0) { deleting = false; ri = (ri + 1) % roles.length; }
+    if (ci === 0) {
+      deleting = false;
+      ri = (ri + 1) % roles.length;
+    }
   }
   setTimeout(type, deleting ? 48 : 88);
 }
@@ -33,8 +56,12 @@ type();
 
 /* ── FLOATING PARTICLES ── */
 const pc = document.getElementById('particles');
-const pColors = ['rgba(91,71,224,0.22)', 'rgba(13,148,136,0.18)', 'rgba(124,111,255,0.2)'];
-for (let i = 0; i < 16; i++) {
+const pColors = [
+  'rgba(91,71,224,0.22)',
+  'rgba(13,148,136,0.18)',
+  'rgba(124,111,255,0.2)'
+];
+for (let i = 0; i < 14; i++) {
   const p = document.createElement('div');
   p.className = 'particle';
   const s = Math.random() * 3 + 1;
@@ -50,15 +77,25 @@ for (let i = 0; i < 16; i++) {
 
 /* ── SCROLL REVEAL ── */
 const revObs = new IntersectionObserver(entries => {
-  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
-}, { threshold: 0.12 });
+  entries.forEach(e => {
+    if (e.isIntersecting) e.target.classList.add('visible');
+  });
+}, { threshold: 0.1 });
 
-document.querySelectorAll('.timeline-item, .project-card, .cert-card, .reveal')
-  .forEach(el => revObs.observe(el));
+document.querySelectorAll(
+  '.timeline-item, .project-card, .cert-card, .skill-block, .edu-card, .reveal'
+).forEach(el => revObs.observe(el));
 
-/* stagger transitions */
-document.querySelectorAll('.cert-card').forEach((c, i) => { c.style.transitionDelay = (i * 0.07) + 's'; });
-document.querySelectorAll('.project-card').forEach((c, i) => { c.style.transitionDelay = (i * 0.09) + 's'; });
+/* Stagger transitions */
+document.querySelectorAll('.cert-card').forEach((c, i) => {
+  c.style.transitionDelay = (i * 0.07) + 's';
+});
+document.querySelectorAll('.project-card').forEach((c, i) => {
+  c.style.transitionDelay = (i * 0.09) + 's';
+});
+document.querySelectorAll('.skill-block').forEach((c, i) => {
+  c.style.transitionDelay = (i * 0.07) + 's';
+});
 
 /* ── COUNTER ANIMATION ── */
 function animateCounter(el, target) {
@@ -71,12 +108,27 @@ function animateCounter(el, target) {
   }, 28);
 }
 
-new IntersectionObserver(entries => {
-  entries.forEach(e =>
-    if (e.isIntersecting) {
-      e.target.querySelectorAll('[data-count]').forEach(el => {
-        animateCounter(el, parseInt(el.dataset.count));
-      });
-    }
-  });
-}, { threshold: 0.5 }).observe(document.querySelector('.hero-stats'));
+const statsSection = document.querySelector('.hero-stats');
+if (statsSection) {
+  let countersRun = false;
+  new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting && !countersRun) {
+        countersRun = true;
+        document.querySelectorAll('.stat-num[data-count]').forEach(el => {
+          animateCounter(el, parseInt(el.dataset.count));
+        });
+      }
+    });
+  }, { threshold: 0.5 }).observe(statsSection);
+}
+
+/* ── NAVBAR SCROLL SHADOW ── */
+const navbar = document.getElementById('navbar');
+window.addEventListener('scroll', () => {
+  if (window.scrollY > 20) {
+    navbar.style.boxShadow = '0 2px 20px rgba(80,60,200,0.07)';
+  } else {
+    navbar.style.boxShadow = 'none';
+  }
+}, { passive: true });
