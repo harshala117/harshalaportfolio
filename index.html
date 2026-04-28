@@ -1,516 +1,1429 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Harshala Pawar</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Harshala Pawar — Software Developer & Cloud Engineer</title>
+  <meta name="description" content="Harshala Pawar — Software Developer specializing in cloud-native architectures, AI-powered backends, and full-stack systems."/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@400;500&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --bg: #0a0a0f;
+      --bg2: #111118;
+      --bg3: #16161f;
+      --border: rgba(255,255,255,0.07);
+      --border-hover: rgba(99,179,237,0.4);
+      --text: #e8e8f0;
+      --muted: #7a7a9a;
+      --accent: #63b3ed;
+      --accent2: #76e4b0;
+      --accent3: #f6c90e;
+      --card: #13131c;
+      --tag-bg: rgba(99,179,237,0.08);
+      --tag-border: rgba(99,179,237,0.2);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 16px;
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    /* Noise texture overlay */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0.4;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 48px;
+      height: 64px;
+      background: rgba(10,10,15,0.85);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-logo {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.3rem;
+      color: var(--text);
+      text-decoration: none;
+      letter-spacing: -0.02em;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 32px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.82rem;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--text); }
+
+    .nav-cta {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .available-dot {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.75rem;
+      color: var(--accent2);
+      font-family: 'DM Mono', monospace;
+    }
+
+    .available-dot::before {
+      content: '';
+      width: 7px; height: 7px;
+      background: var(--accent2);
+      border-radius: 50%;
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.5; transform: scale(1.3); }
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 18px;
+      border-radius: 6px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.2s;
+      cursor: pointer;
+      border: none;
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: #0a0a0f;
+    }
+    .btn-primary:hover { background: #90cdf4; transform: translateY(-1px); }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--text);
+      border: 1px solid var(--border-hover);
+    }
+    .btn-outline:hover { background: rgba(99,179,237,0.08); border-color: var(--accent); }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 120px 48px 80px;
+      position: relative;
+    }
+
+    .hero-bg-grid {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(99,179,237,0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(99,179,237,0.03) 1px, transparent 1px);
+      background-size: 60px 60px;
+      pointer-events: none;
+    }
+
+    .hero-bg-glow {
+      position: absolute;
+      top: 20%;
+      right: -10%;
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(circle, rgba(99,179,237,0.06) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero-eyebrow {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.78rem;
+      color: var(--accent);
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      margin-bottom: 24px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .hero-eyebrow::before {
+      content: '';
+      width: 32px;
+      height: 1px;
+      background: var(--accent);
+    }
+
+    .hero h1 {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(3rem, 7vw, 6rem);
+      line-height: 1.05;
+      letter-spacing: -0.03em;
+      color: var(--text);
+      margin-bottom: 8px;
+    }
+
+    .hero h1 em {
+      font-style: italic;
+      color: var(--accent);
+    }
+
+    .hero-subtitle {
+      font-size: clamp(1rem, 2vw, 1.25rem);
+      color: var(--muted);
+      max-width: 560px;
+      margin: 24px 0 16px;
+      line-height: 1.6;
+    }
+
+    .hero-availability {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(118,228,176,0.07);
+      border: 1px solid rgba(118,228,176,0.2);
+      border-radius: 100px;
+      padding: 6px 14px;
+      font-size: 0.8rem;
+      color: var(--accent2);
+      font-family: 'DM Mono', monospace;
+      margin-bottom: 40px;
+    }
+
+    .hero-availability::before {
+      content: '';
+      width: 6px; height: 6px;
+      background: var(--accent2);
+      border-radius: 50%;
+      animation: pulse 2s infinite;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    .btn-hero-primary {
+      padding: 13px 28px;
+      font-size: 0.9rem;
+      background: var(--accent);
+      color: #0a0a0f;
+      border-radius: 8px;
+      font-weight: 700;
+    }
+
+    .btn-hero-outline {
+      padding: 13px 28px;
+      font-size: 0.9rem;
+      background: transparent;
+      color: var(--text);
+      border: 1px solid var(--border-hover);
+      border-radius: 8px;
+      font-weight: 600;
+    }
+
+    .hero-stats {
+      display: flex;
+      gap: 48px;
+      margin-top: 64px;
+      padding-top: 48px;
+      border-top: 1px solid var(--border);
+    }
+
+    .stat-num {
+      font-family: 'DM Serif Display', serif;
+      font-size: 2.2rem;
+      color: var(--text);
+      line-height: 1;
+    }
+
+    .stat-label {
+      font-size: 0.78rem;
+      color: var(--muted);
+      margin-top: 4px;
+      font-family: 'DM Mono', monospace;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    /* ── SECTIONS ── */
+    section {
+      padding: 100px 48px;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .section-label {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.72rem;
+      color: var(--accent);
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .section-label::before {
+      content: '';
+      width: 24px;
+      height: 1px;
+      background: var(--accent);
+    }
+
+    h2 {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(2rem, 4vw, 3rem);
+      letter-spacing: -0.03em;
+      line-height: 1.1;
+      margin-bottom: 56px;
+      color: var(--text);
+    }
+
+    /* ── ABOUT ── */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 64px;
+      align-items: start;
+    }
+
+    .about-text p {
+      color: var(--muted);
+      margin-bottom: 18px;
+      font-size: 1.05rem;
+      line-height: 1.75;
+    }
+
+    .about-text strong { color: var(--text); font-weight: 600; }
+
+    .about-sidebar {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .about-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 20px 24px;
+      transition: border-color 0.2s;
+    }
+
+    .about-card:hover { border-color: var(--border-hover); }
+
+    .about-card-label {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.7rem;
+      color: var(--muted);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+
+    .about-card-value {
+      font-size: 0.95rem;
+      color: var(--text);
+      font-weight: 500;
+    }
+
+    /* ── SKILLS ── */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+    }
+
+    .skill-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 28px;
+      transition: all 0.25s;
+    }
+
+    .skill-card:hover {
+      border-color: var(--border-hover);
+      transform: translateY(-3px);
+    }
+
+    .skill-card-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 18px;
+    }
+
+    .skill-icon {
+      width: 36px; height: 36px;
+      background: rgba(99,179,237,0.1);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+    }
+
+    .skill-card-title {
+      font-weight: 600;
+      font-size: 0.95rem;
+    }
+
+    .skill-tier {
+      margin-bottom: 10px;
+    }
+
+    .skill-tier-label {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.65rem;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 6px;
+    }
+
+    .skill-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .tag {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.7rem;
+      padding: 3px 10px;
+      border-radius: 100px;
+      background: var(--tag-bg);
+      border: 1px solid var(--tag-border);
+      color: var(--accent);
+    }
+
+    .tag.green {
+      background: rgba(118,228,176,0.07);
+      border-color: rgba(118,228,176,0.2);
+      color: var(--accent2);
+    }
+
+    .tag.muted {
+      background: rgba(122,122,154,0.08);
+      border-color: rgba(122,122,154,0.15);
+      color: var(--muted);
+    }
+
+    /* ── EXPERIENCE ── */
+    .timeline {
+      position: relative;
+      padding-left: 32px;
+    }
+
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 8px; bottom: 8px;
+      width: 1px;
+      background: linear-gradient(to bottom, var(--accent), transparent);
+    }
+
+    .timeline-item {
+      position: relative;
+      margin-bottom: 48px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 28px 32px;
+      transition: border-color 0.2s;
+    }
+
+    .timeline-item:hover { border-color: var(--border-hover); }
+
+    .timeline-item::before {
+      content: '';
+      position: absolute;
+      left: -38px;
+      top: 28px;
+      width: 10px; height: 10px;
+      background: var(--accent);
+      border-radius: 50%;
+      border: 2px solid var(--bg);
+    }
+
+    .timeline-date {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.72rem;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 8px;
+    }
+
+    .timeline-role {
+      font-size: 1.15rem;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 4px;
+    }
+
+    .timeline-company {
+      font-size: 0.88rem;
+      color: var(--accent);
+      margin-bottom: 16px;
+    }
+
+    .timeline-bullets {
+      list-style: none;
+      padding: 0;
+    }
+
+    .timeline-bullets li {
+      position: relative;
+      padding-left: 20px;
+      color: var(--muted);
+      font-size: 0.93rem;
+      margin-bottom: 8px;
+      line-height: 1.65;
+    }
+
+    .timeline-bullets li::before {
+      content: '→';
+      position: absolute;
+      left: 0;
+      color: var(--accent);
+      font-size: 0.75rem;
+      top: 3px;
+    }
+
+    /* ── PROJECTS ── */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+
+    .project-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 28px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      transition: all 0.25s;
+      text-decoration: none;
+    }
+
+    .project-card:hover {
+      border-color: var(--border-hover);
+      transform: translateY(-4px);
+      box-shadow: 0 16px 48px rgba(0,0,0,0.4);
+    }
+
+    .project-card.featured {
+      grid-column: span 2;
+      background: linear-gradient(135deg, #13131c 0%, #0f1a24 100%);
+      border-color: rgba(99,179,237,0.2);
+    }
+
+    .project-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-family: 'DM Mono', monospace;
+      font-size: 0.65rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 3px 10px;
+      border-radius: 100px;
+      background: rgba(246,201,14,0.1);
+      border: 1px solid rgba(246,201,14,0.25);
+      color: var(--accent3);
+      width: fit-content;
+    }
+
+    .project-title {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--text);
+      line-height: 1.3;
+    }
+
+    .project-impact {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.8rem;
+      color: var(--accent2);
+      padding: 8px 14px;
+      background: rgba(118,228,176,0.06);
+      border-left: 2px solid var(--accent2);
+      border-radius: 0 6px 6px 0;
+    }
+
+    .project-desc {
+      color: var(--muted);
+      font-size: 0.9rem;
+      line-height: 1.65;
+      flex: 1;
+    }
+
+    .project-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .project-links {
+      display: flex;
+      gap: 10px;
+      padding-top: 8px;
+      border-top: 1px solid var(--border);
+    }
+
+    .project-link {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.72rem;
+      color: var(--muted);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      transition: color 0.2s;
+    }
+
+    .project-link:hover { color: var(--accent); }
+
+    /* ── CERTIFICATIONS ── */
+    .certs-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 16px;
+    }
+
+    .cert-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 22px 24px;
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      transition: all 0.2s;
+      text-decoration: none;
+    }
+
+    .cert-card:hover {
+      border-color: var(--border-hover);
+      transform: translateY(-2px);
+    }
+
+    .cert-icon {
+      width: 42px; height: 42px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      flex-shrink: 0;
+      background: rgba(99,179,237,0.08);
+      border: 1px solid rgba(99,179,237,0.15);
+    }
+
+    .cert-info { flex: 1; }
+
+    .cert-name {
+      font-weight: 600;
+      font-size: 0.92rem;
+      color: var(--text);
+      margin-bottom: 3px;
+    }
+
+    .cert-issuer {
+      font-size: 0.8rem;
+      color: var(--muted);
+    }
+
+    .cert-meta {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-top: 8px;
+    }
+
+    .cert-year {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.7rem;
+      color: var(--accent);
+    }
+
+    .cert-verify {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.7rem;
+      color: var(--muted);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      transition: color 0.2s;
+    }
+
+    .cert-verify:hover { color: var(--accent); }
+
+    /* ── EDUCATION ── */
+    .edu-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+
+    .edu-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 28px;
+      transition: border-color 0.2s;
+    }
+
+    .edu-card:hover { border-color: var(--border-hover); }
+
+    .edu-degree {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.2rem;
+      color: var(--text);
+      margin-bottom: 4px;
+    }
+
+    .edu-field {
+      font-size: 0.88rem;
+      color: var(--accent);
+      margin-bottom: 12px;
+    }
+
+    .edu-school {
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 4px;
+    }
+
+    .edu-meta {
+      font-size: 0.8rem;
+      color: var(--muted);
+      margin-bottom: 16px;
+    }
+
+    .edu-courses {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    /* ── CONTACT ── */
+    .contact-wrapper {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 56px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .contact-wrapper::before {
+      content: '';
+      position: absolute;
+      top: -100px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 400px;
+      height: 400px;
+      background: radial-gradient(circle, rgba(99,179,237,0.07) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .contact-wrapper h2 {
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      margin-bottom: 16px;
+    }
+
+    .contact-sub {
+      color: var(--muted);
+      font-size: 1rem;
+      max-width: 500px;
+      margin: 0 auto 40px;
+    }
+
+    .contact-links {
+      display: flex;
+      justify-content: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .contact-link {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 12px 24px;
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      text-decoration: none;
+      color: var(--text);
+      font-size: 0.88rem;
+      font-weight: 500;
+      transition: all 0.2s;
+    }
+
+    .contact-link:hover {
+      border-color: var(--border-hover);
+      background: rgba(99,179,237,0.05);
+      transform: translateY(-2px);
+    }
+
+    .contact-link-icon {
+      font-size: 1rem;
+      color: var(--accent);
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 28px 48px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-family: 'DM Mono', monospace;
+      font-size: 0.72rem;
+      color: var(--muted);
+    }
+
+    footer a {
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    footer a:hover { color: var(--accent); }
+
+    .footer-links {
+      display: flex;
+      gap: 24px;
+    }
+
+    /* ── ANIMATIONS ── */
+    .fade-up {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+
+    .fade-up.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      nav { padding: 0 20px; }
+      .nav-links { display: none; }
+      .hero { padding: 100px 20px 60px; }
+      section { padding: 70px 20px; }
+      .about-grid { grid-template-columns: 1fr; }
+      .projects-grid { grid-template-columns: 1fr; }
+      .project-card.featured { grid-column: span 1; }
+      .edu-grid { grid-template-columns: 1fr; }
+      .contact-wrapper { padding: 36px 24px; }
+      footer { padding: 24px 20px; flex-direction: column; gap: 12px; text-align: center; }
+      .hero-stats { gap: 28px; flex-wrap: wrap; }
+    }
+
+    @media (max-width: 480px) {
+      .hero h1 { font-size: 2.6rem; }
+      .hero-actions { flex-direction: column; }
+      .hero-actions .btn { text-align: center; justify-content: center; }
+    }
+  </style>
 </head>
 <body>
 
-<div id="cursor-glow"></div>
-<div id="particles"></div>
-
 <!-- NAV -->
-<nav id="navbar">
-  <div class="nav-logo">HP</div>
-  <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">
-    <span></span><span></span><span></span>
-  </button>
-  <ul class="nav-links" id="navLinks">
+<nav>
+  <a href="#" class="nav-logo">Harshala Pawar</a>
+  <ul class="nav-links">
     <li><a href="#about">About</a></li>
     <li><a href="#skills">Skills</a></li>
     <li><a href="#experience">Experience</a></li>
     <li><a href="#projects">Projects</a></li>
-    <li><a href="#certs">Certifications</a></li>
+    <li><a href="#certs">Certs</a></li>
     <li><a href="#education">Education</a></li>
     <li><a href="#contact">Contact</a></li>
   </ul>
-  <div class="nav-status">
-    <div class="status-dot"></div>
-    <span>Open to opportunities</span>
+  <div class="nav-cta">
+    <span class="available-dot">Available May 2026</span>
+    <a href="resume.pdf" download class="btn btn-primary">↓ Resume</a>
   </div>
 </nav>
 
 <!-- HERO -->
-<section id="hero">
-  <div class="hero-inner">
-    <div class="hero-tag">
-      <span class="tag-arrow">▸</span>
-    Software Developer . Cloud Engineer
-    </div>
-
-    <h1 class="hero-name">
-      <span>Harshala</span>
-      <span>Pawar</span>
-    </h1>
-
-    <p class="hero-role">
-      <span id="typed-text"></span><span class="typed-cursor">_</span>
+<section class="hero">
+  <div class="hero-bg-grid"></div>
+  <div class="hero-bg-glow"></div>
+  <div style="position:relative;z-index:1;">
+    <div class="hero-eyebrow">Software Developer &amp; Cloud Engineer</div>
+    <h1>Harshala<br/><em>Pawar</em></h1>
+    <p class="hero-subtitle">
+      Building AI-native cloud systems on AWS — full-stack, serverless, production-ready.
+      Specializing in cloud-native architectures, RAG pipelines, and scalable backend systems.
     </p>
-
-    <p class="hero-desc">
-      Software engineer specializing in cloud-native architectures,
-      AI-powered backends, and full-stack systems. Currently pursuing
-      an MS in Information Technology at UT Dallas.
-    </p>
-
-    <div class="hero-cta">
-      <a href="#projects" class="btn-primary">View Projects ↓</a>
-      <a href="#contact" class="btn-ghost">Get In Touch</a>
+    <div class="hero-availability">Available May 2026 · Seeking full-time SWE / Cloud / AI roles · Dallas, TX</div>
+    <div class="hero-actions">
+      <a href="#projects" class="btn btn-hero-primary">View Projects ↓</a>
+      <a href="resume.pdf" download class="btn btn-hero-outline btn">↓ Download Resume</a>
+      <a href="#contact" class="btn btn-outline btn">Get In Touch</a>
     </div>
-
     <div class="hero-stats">
-  
-      <div class="stat-item">
-        <div class="stat-num" data-count="3">3<span>+</span></div>
-        <div class="stat-label">Cloud Projects</div>
+      <div>
+        <div class="stat-num">10+</div>
+        <div class="stat-label">Projects Built</div>
       </div>
-      <div class="stat-item">
-        <div class="stat-num" data-count="6">6<span>+</span></div>
-        <div class="stat-label">Certifications</div>
+      <div>
+        <div class="stat-num">6+</div>
+        <div class="stat-label">AWS Certifications</div>
       </div>
-      <div class="stat-item">
-        <div class="stat-num" data-count="50">50<span>+</span></div>
+      <div>
+        <div class="stat-num">50+</div>
         <div class="stat-label">Students Mentored</div>
+      </div>
+      <div>
+        <div class="stat-num">500+</div>
+        <div class="stat-label">Docs Processed (AI)</div>
       </div>
     </div>
   </div>
-
- 
 </section>
 
 <!-- ABOUT -->
-<section id="about">
-  <div class="section-wrap">
-    <div class="section-label">// 01 — About</div>
-    <h2 class="section-title"><span class="underline-accent">Background</span></h2>
-    <div class="about-text reveal">
-      <p>
-        I'm a <strong> Software Developer</strong> with a focus on building scalable
-        cloud-native applications and AI-integrated systems. From designing microservice
-        architectures to deploying serverless pipelines on AWS, I work across the full stack.
-      </p>
-      <p>
-        At <strong>Sourcewell</strong>, I built production systems using Java Spring Boot, React, and Angular,
-        owning delivery end-to-end in Agile environments. I led performance optimizations
-        that reduced latency by 15% and improved system reliability measurably.
-      </p>
-      <p>
-        Currently at <strong>UT Dallas</strong>, I'm deepening expertise in cloud computing,
-        ML systems, and conversational AI — applying this through real projects including
-        RAG pipelines and serverless assistants built on AWS Bedrock.
-      </p>
+<section id="about" class="fade-up">
+  <div class="section-label">01 — About</div>
+  <h2>Background</h2>
+  <div class="about-grid">
+    <div class="about-text">
+      <p>I'm a <strong>Software Developer</strong> with a focus on building scalable cloud-native applications and AI-integrated systems. From designing microservice architectures to deploying serverless pipelines on AWS, I work across the full stack.</p>
+      <p>At <strong>Sourcewell</strong>, I built production systems using Java Spring Boot, React, and Angular — owning delivery end-to-end in Agile environments. I led performance optimizations that reduced latency by 15% and improved system reliability by 12%.</p>
+      <p>Currently at <strong>UT Dallas</strong>, I'm deepening expertise in cloud computing, ML systems, and conversational AI — applying this through real projects including RAG pipelines and serverless assistants built on Amazon Bedrock. I also serve as <strong>Technology Officer</strong> for AWS Cloud Club @ UTD, designing and facilitating hands-on workshops for 50+ engineers.</p>
+    </div>
+    <div class="about-sidebar">
+      <div class="about-card">
+        <div class="about-card-label">Currently</div>
+        <div class="about-card-value">MS Information Technology @ UT Dallas</div>
+      </div>
+      <div class="about-card">
+        <div class="about-card-label">Role</div>
+        <div class="about-card-value">Technology Officer, AWS Cloud Club @ UTD</div>
+      </div>
+      <div class="about-card">
+        <div class="about-card-label">Location</div>
+        <div class="about-card-value">Dallas, TX</div>
+      </div>
+      <div class="about-card">
+        <div class="about-card-label">Open To</div>
+        <div class="about-card-value">Full-time · SWE · Cloud Engineering · AI/ML</div>
+      </div>
+      <div class="about-card">
+        <div class="about-card-label">Available</div>
+        <div class="about-card-value" style="color: var(--accent2);">May 2026</div>
+      </div>
     </div>
   </div>
 </section>
 
 <!-- SKILLS -->
-<section id="skills">
-  <div class="section-wrap">
-    <div class="section-label">// 02 — Skills</div>
-    <h2 class="section-title"><span class="underline-accent">Technical Skills</span></h2>
+<section id="skills" class="fade-up">
+  <div class="section-label">02 — Skills</div>
+  <h2>Technical Skills</h2>
+  <div class="skills-grid">
 
-    <div class="skills-grid">
-
-      <div class="skill-block reveal">
-        <div class="skill-block-header">
-          <span class="skill-block-icon">⚙️</span>
-          <span class="skill-block-label">Backend</span>
-        </div>
+    <div class="skill-card">
+      <div class="skill-card-header">
+        <div class="skill-icon">⚙️</div>
+        <div class="skill-card-title">Backend</div>
+      </div>
+      <div class="skill-tier">
+        <div class="skill-tier-label">Proficient</div>
         <div class="skill-tags">
-          <span class="skill-tag hot">Java Spring Boot</span>
-          <span class="skill-tag hot">Python FastAPI</span>
-          <span class="skill-tag">Node.js</span>
-          <span class="skill-tag">REST APIs</span>
-          <span class="skill-tag">Microservices</span>
-          <span class="skill-tag">Serverless</span>
+          <span class="tag">Java Spring Boot</span>
+          <span class="tag">Python FastAPI</span>
+          <span class="tag">REST APIs</span>
+          <span class="tag">Microservices</span>
         </div>
       </div>
-
-      <div class="skill-block reveal">
-        <div class="skill-block-header">
-          <span class="skill-block-icon">🖥️</span>
-          <span class="skill-block-label">Frontend</span>
-        </div>
+      <div class="skill-tier">
+        <div class="skill-tier-label">Familiar</div>
         <div class="skill-tags">
-          <span class="skill-tag">React.js</span>
-          <span class="skill-tag">Angular</span>
-          <span class="skill-tag">TypeScript</span>
-          <span class="skill-tag">HTML5 / CSS3</span>
-          <span class="skill-tag">JavaScript</span>
+          <span class="tag muted">Node.js</span>
+          <span class="tag muted">Serverless</span>
         </div>
       </div>
-
-      <div class="skill-block reveal">
-        <div class="skill-block-header">
-          <span class="skill-block-icon">☁️</span>
-          <span class="skill-block-label">Cloud &amp; DevOps</span>
-        </div>
-        <div class="skill-tags">
-          <span class="skill-tag hot">AWS Lambda</span>
-          <span class="skill-tag hot">AWS Bedrock</span>
-          <span class="skill-tag">ECS / EKS</span>
-          <span class="skill-tag">Docker</span>
-          <span class="skill-tag">Kubernetes</span>
-          <span class="skill-tag">Terraform</span>
-          <span class="skill-tag">GitHub Actions</span>
-          <span class="skill-tag">Jenkins</span>
-        </div>
-      </div>
-
-      <div class="skill-block reveal">
-        <div class="skill-block-header">
-          <span class="skill-block-icon">🤖</span>
-          <span class="skill-block-label">AI / ML</span>
-        </div>
-        <div class="skill-tags">
-          <span class="skill-tag hot">RAG Pipelines</span>
-           <span class="skill-tag hot">Computer Vision</span>
-          <span class="skill-tag hot">LangChain</span>
-          <span class="skill-tag">LangGraph</span>
-          <span class="skill-tag">Amazon Bedrock</span>
-          <span class="skill-tag">Embeddings</span>
-          <span class="skill-tag">Llama 3</span>
-        </div>
-      </div>
-
-      <div class="skill-block reveal">
-        <div class="skill-block-header">
-          <span class="skill-block-icon">🗄️</span>
-          <span class="skill-block-label">Databases</span>
-        </div>
-        <div class="skill-tags">
-          <span class="skill-tag">PostgreSQL</span>
-          <span class="skill-tag">DynamoDB</span>
-          <span class="skill-tag">MongoDB</span>
-          <span class="skill-tag">MySQL</span>
-        </div>
-      </div>
-
-      <div class="skill-block reveal">
-        <div class="skill-block-header">
-          <span class="skill-block-icon">🛠️</span>
-          <span class="skill-block-label">Tools &amp; Practices</span>
-        </div>
-        <div class="skill-tags">
-          <span class="skill-tag">Git</span>
-          <span class="skill-tag">Agile / Scrum</span>
-          <span class="skill-tag">CI/CD</span>
-          <span class="skill-tag">Unit Testing</span>
-          <span class="skill-tag">System Design</span>
-        </div>
-      </div>
-
     </div>
+
+    <div class="skill-card">
+      <div class="skill-card-header">
+        <div class="skill-icon">🖥️</div>
+        <div class="skill-card-title">Frontend</div>
+      </div>
+      <div class="skill-tier">
+        <div class="skill-tier-label">Proficient</div>
+        <div class="skill-tags">
+          <span class="tag">React.js</span>
+          <span class="tag">Angular</span>
+          <span class="tag">TypeScript</span>
+          <span class="tag">JavaScript</span>
+        </div>
+      </div>
+      <div class="skill-tier">
+        <div class="skill-tier-label">Familiar</div>
+        <div class="skill-tags">
+          <span class="tag muted">HTML5 / CSS3</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="skill-card">
+      <div class="skill-card-header">
+        <div class="skill-icon">☁️</div>
+        <div class="skill-card-title">Cloud & DevOps</div>
+      </div>
+      <div class="skill-tier">
+        <div class="skill-tier-label">Proficient</div>
+        <div class="skill-tags">
+          <span class="tag">AWS Lambda</span>
+          <span class="tag">AWS Bedrock</span>
+          <span class="tag">Docker</span>
+          <span class="tag">GitHub Actions</span>
+        </div>
+      </div>
+      <div class="skill-tier">
+        <div class="skill-tier-label">Familiar</div>
+        <div class="skill-tags">
+          <span class="tag muted">ECS / EKS</span>
+          <span class="tag muted">Kubernetes</span>
+          <span class="tag muted">Terraform</span>
+          <span class="tag muted">Jenkins</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="skill-card">
+      <div class="skill-card-header">
+        <div class="skill-icon">🤖</div>
+        <div class="skill-card-title">AI / ML</div>
+      </div>
+      <div class="skill-tier">
+        <div class="skill-tier-label">Proficient</div>
+        <div class="skill-tags">
+          <span class="tag green">RAG Pipelines</span>
+          <span class="tag green">LangChain</span>
+          <span class="tag green">Amazon Bedrock</span>
+          <span class="tag green">LangGraph</span>
+        </div>
+      </div>
+      <div class="skill-tier">
+        <div class="skill-tier-label">Familiar</div>
+        <div class="skill-tags">
+          <span class="tag muted">Llama 3</span>
+          <span class="tag muted">Embeddings</span>
+          <span class="tag muted">Computer Vision</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="skill-card">
+      <div class="skill-card-header">
+        <div class="skill-icon">🗄️</div>
+        <div class="skill-card-title">Databases</div>
+      </div>
+      <div class="skill-tier">
+        <div class="skill-tier-label">Proficient</div>
+        <div class="skill-tags">
+          <span class="tag">PostgreSQL</span>
+          <span class="tag">DynamoDB</span>
+          <span class="tag">MongoDB</span>
+        </div>
+      </div>
+      <div class="skill-tier">
+        <div class="skill-tier-label">Familiar</div>
+        <div class="skill-tags">
+          <span class="tag muted">MySQL</span>
+          <span class="tag muted">SQLite</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="skill-card">
+      <div class="skill-card-header">
+        <div class="skill-icon">🛠️</div>
+        <div class="skill-card-title">Tools & Practices</div>
+      </div>
+      <div class="skill-tier">
+        <div class="skill-tier-label">Proficient</div>
+        <div class="skill-tags">
+          <span class="tag">Git</span>
+          <span class="tag">Agile / Scrum</span>
+          <span class="tag">CI/CD</span>
+          <span class="tag">System Design</span>
+        </div>
+      </div>
+      <div class="skill-tier">
+        <div class="skill-tier-label">Familiar</div>
+        <div class="skill-tags">
+          <span class="tag muted">Unit Testing</span>
+        </div>
+      </div>
+    </div>
+
   </div>
 </section>
 
 <!-- EXPERIENCE -->
-<section id="experience">
-  <div class="section-wrap">
-    <div class="section-label">// 03 — Experience</div>
-    <h2 class="section-title"><span class="underline-accent">Work History</span></h2>
+<section id="experience" class="fade-up">
+  <div class="section-label">03 — Experience</div>
+  <h2>Work History</h2>
+  <div class="timeline">
 
-    <div class="timeline">
-
-      <div class="timeline-item">
-        <div class="timeline-dot"></div>
-        <div class="timeline-date">JAN 2026 — May 2026</div>
-        <div class="timeline-role">Enterprise Solution Architect Intern</div>
-<div class="timeline-company">Resilient Privacy Inc. — Academic Internship / Digital Consulting Project</div>
-<ul class="timeline-points">
-  <li>Worked on the <strong>AEGIS™ Security Platform</strong>, an AI-powered cybersecurity and IT operations platform focused on secure, scalable enterprise system design</li>
-  <li>Designed high-level solution architecture covering core services, internal APIs, external integrations, cloud infrastructure, database/storage layers, and event-driven communication</li>
-  <li>Evaluated cybersecurity and IT operations challenges and translated business requirements into scalable technical architecture and implementation recommendations</li>
-  <li>Integrated UI/UX considerations into architecture planning to improve platform usability, workflow clarity, and user-centered system design</li>
-  <li>Defined security-focused architecture components including authentication, access control, logging, monitoring, audit readiness, data retention, and multi-tenant isolation</li>
-  <li>Collaborated with cross-functional team members and leadership while maintaining confidentiality and compliance with NDA and intellectual property guidelines</li>
-</ul>
-      </div>
-      
-      <div class="timeline-item">
-        <div class="timeline-dot"></div>
-        <div class="timeline-date">SEP 2025 — PRESENT</div>
-        <div class="timeline-role">Technology Officer</div>
-        <div class="timeline-company">AWS Cloud Club @ UTD — Dallas, TX</div>
-        <ul class="timeline-points">
-          <li>Designed and facilitated hands-on workshops on AWS infrastructure, CI/CD pipelines, Docker, and serverless architecture for <span class="metric-badge">50+ engineers</span></li>
-          <li>Translated enterprise cloud patterns into reproducible lab environments, simulating real-world consulting deployments</li>
-        </ul>
-      </div>
-
-      <div class="timeline-item">
-        <div class="timeline-dot"></div>
-        <div class="timeline-date">JAN 2023 — JUL 2024</div>
-        <div class="timeline-role">Associate Software Developer</div>
-        <div class="timeline-company">Sourcewell Device Pvt. Ltd. — Mumbai, India</div>
-        <ul class="timeline-points">
-          <li>Built full-stack features end-to-end using Java REST APIs and Angular/React.js, owning delivery across requirements, design, testing and deployment in Agile/Scrum</li>
-          <li>Redesigned the service layer with Java microservices and Angular dashboard, improving system reliability by <span class="metric-badge">+12%</span></li>
-          <li>Architected a reusable React component library, reducing new feature development time by <span class="metric-badge">35%</span> and eliminating visual inconsistency bugs</li>
-          <li>Improved application throughput by <span class="metric-badge">+15%</span> during peak traffic by profiling JavaScript assets and redesigning PostgreSQL indexing strategies</li>
-          <li>Maintained automated test suites achieving <span class="metric-badge">90%+ coverage</span> via GitHub Actions CI/CD pipelines</li>
-        </ul>
-      </div>
-
+    <div class="timeline-item">
+      <div class="timeline-date">Jan 2026 — May 2026</div>
+      <div class="timeline-role">Enterprise Solution Architect Intern</div>
+      <div class="timeline-company">Resilient Privacy Inc. — Academic Consulting Project · Dallas, TX</div>
+      <ul class="timeline-bullets">
+        <li>Designed high-level solution architecture for the <strong>AEGIS™ Security Platform</strong>, covering core services, APIs, cloud infrastructure, database/storage layers, and event-driven communication</li>
+        <li>Evaluated cybersecurity and IT operations challenges, translating business requirements into scalable technical architecture recommendations</li>
+        <li>Defined security-focused architecture components including authentication, access control, audit readiness, and multi-tenant isolation</li>
+        <li>Integrated UI/UX considerations into architecture planning to improve platform usability and workflow clarity</li>
+      </ul>
     </div>
+
+    <div class="timeline-item">
+      <div class="timeline-date">Sep 2025 — Present</div>
+      <div class="timeline-role">Technology Officer</div>
+      <div class="timeline-company">AWS Cloud Club @ UTD — Dallas, TX</div>
+      <ul class="timeline-bullets">
+        <li>Designed and facilitated hands-on workshops on AWS infrastructure, CI/CD pipelines, Docker, and serverless architecture for <strong>50+ engineers</strong></li>
+        <li>Translated enterprise cloud patterns into reproducible lab environments, simulating real-world consulting deployments</li>
+      </ul>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-date">Jan 2023 — Jul 2024</div>
+      <div class="timeline-role">Associate Software Developer</div>
+      <div class="timeline-company">Sourcewell Device Pvt. Ltd. — Mumbai, India</div>
+      <ul class="timeline-bullets">
+        <li>Built full-stack features using Java REST APIs and Angular/React.js, owning delivery across requirements, design, testing and deployment in Agile/Scrum</li>
+        <li>Redesigned the service layer with Java microservices, improving system reliability by <strong>+12%</strong></li>
+        <li>Architected a reusable React component library, reducing new feature development time by <strong>35%</strong></li>
+        <li>Improved application throughput by <strong>+15%</strong> by profiling JavaScript assets and redesigning PostgreSQL indexing strategies</li>
+        <li>Maintained automated test suites achieving <strong>90%+ coverage</strong> via GitHub Actions CI/CD pipelines</li>
+      </ul>
+    </div>
+
   </div>
 </section>
 
 <!-- PROJECTS -->
-<section id="projects">
-  <div class="section-wrap">
-    <div class="section-label">// 04 — Projects</div>
-    <h2 class="section-title"><span class="underline-accent">Selected Work</span></h2>
+<section id="projects" class="fade-up">
+  <div class="section-label">04 — Projects</div>
+  <h2>Selected Work</h2>
+  <div class="projects-grid">
 
-    <div class="projects-grid">
-
-      <div class="project-card featured">
-        <div class="project-content">
-          <div class="project-num">PROJECT 01 · FEATURED · FEB 2026</div>
-          <div class="project-title">Intelligent Knowledge AI Agent for Vendor Risk Assessment</div>
-          <div class="project-desc">
-            FastAPI backend with React frontend automating vendor risk document analysis for
-            financial workflows. Reduced manual review time from 4 hours to under 10 minutes.
-            Integrates a RAG pipeline using LangChain + LangGraph with Llama 3 via Groq,
-            enabling semantic search across a 500+ document corpus with sub-second response times.
-          </div>
-          <div class="project-tech">
-            <span class="tech-pill">FastAPI</span>
-            <span class="tech-pill">React</span>
-            <span class="tech-pill">LangChain</span>
-            <span class="tech-pill">LangGraph</span>
-            <span class="tech-pill">Llama 3</span>
-            <span class="tech-pill">Groq</span>
-            <span class="tech-pill">RAG</span>
-            <span class="tech-pill">Python</span>
-          </div>
-        </div>
-        <div class="project-visual">
-          <div class="rag-visual">
-            <div class="rag-label">RAG PIPELINE</div>
-            <div class="rag-flow">
-              <div class="rag-node">Doc<br>Ingest</div>
-              <div class="rag-arrow">→</div>
-              <div class="rag-node">Embed<br>Chunks</div>
-              <div class="rag-arrow">→</div>
-              <div class="rag-node">Vector<br>Store</div>
-              <div class="rag-arrow">→</div>
-              <div class="rag-node">LLM<br>Output</div>
-            </div>
-            <div class="rag-stat">4 hrs → &lt;10 min review time</div>
-          </div>
-        </div>
+    <div class="project-card featured">
+      <div class="project-badge">★ Featured · Feb 2026</div>
+      <div class="project-title">Intelligent Knowledge AI Agent for Vendor Risk Assessment</div>
+      <div class="project-impact">4 hrs → &lt;10 min review time · 500+ document corpus · sub-second response</div>
+      <p class="project-desc">FastAPI backend with React frontend automating vendor risk document analysis for financial workflows. Integrates a RAG pipeline using LangChain + LangGraph with Llama 3 via Groq, enabling semantic search across a 500+ document corpus.</p>
+      <div class="project-tags">
+        <span class="tag">FastAPI</span>
+        <span class="tag">React</span>
+        <span class="tag">LangChain</span>
+        <span class="tag">LangGraph</span>
+        <span class="tag">Llama 3</span>
+        <span class="tag">Groq</span>
+        <span class="tag green">RAG</span>
       </div>
-
-      <div class="project-card">
-        <div class="project-num">PROJECT 02 · FEB 2026</div>
-        <div class="project-title">AI Campus Assistant — Conversational AI System</div>
-        <div class="project-desc">
-          Serverless conversational assistant using Amazon Bedrock, Lambda, API Gateway, and S3.
-          Handles campus dining, events, and parking queries with query routing,
-          response generation, and AI-to-human escalation scenarios.
-        </div>
-        <div class="project-tech">
-          <span class="tech-pill">Amazon Bedrock</span>
-          <span class="tech-pill">AWS Lambda</span>
-          <span class="tech-pill">API Gateway</span>
-          <span class="tech-pill">S3</span>
-          <span class="tech-pill">Serverless</span>
-        </div>
-      </div>
-
-      <div class="project-card">
-        <div class="project-num">PROJECT 03 · SEP 2025</div>
-        <div class="project-title">Wild Rydes — Cloud-Native Ride Sharing App</div>
-        <div class="project-desc">
-          Fully serverless platform on AWS with React frontend. Eliminated EC2 dependency,
-          enforced zero-trust security via JWT and IAM.
-          Achieved 95%+ test coverage across all Lambda functions and API endpoints.
-        </div>
-        <div class="project-tech">
-          <span class="tech-pill">AWS Lambda</span>
-          <span class="tech-pill">API Gateway</span>
-          <span class="tech-pill">Cognito</span>
-          <span class="tech-pill">DynamoDB</span>
-          <span class="tech-pill">React</span>
-          <span class="tech-pill">JWT / IAM</span>
-        </div>
-      </div>
-
-      <div class="project-card">
-        <div class="project-num">PROJECT 04 · NOV 2025</div>
-        <div class="project-title">Gym Database Management System</div>
-        <div class="project-desc">
-          Full-stack web app for a multi-entity gym management system supporting
-          memberships, payments, and trainer management. Normalized PostgreSQL schema
-          with indexing and query optimization for high-load performance.
-        </div>
-        <div class="project-tech">
-          <span class="tech-pill">JavaScript</span>
-          <span class="tech-pill">PostgreSQL</span>
-          <span class="tech-pill">Node.js</span>
-          <span class="tech-pill">Schema Design</span>
-        </div>
-      </div>
-<div class="project-card">
-        <div class="project-num">PROJECT 05 · April 2022</div>
-        <div class="project-title">Live-Stress-Detection-and-Management-System</div>
-        <div class="project-desc">
-       This project aims to detect stress levels in IT professionals using Image Processing and Machine Learning techniques.
-          The system captures facial images, processes them, and classifies stress levels to help organizations improve employee well-being and productivity.
-        </div>
-        <div class="project-tech">
-          <span class="tech-pill">Python</span>
-          <span class="tech-pill">SQLite</span>
-          <span class="tech-pill">KNN</span>
-          <span class="tech-pill">Vscode</span>
-        </div>
-      </div>
-      <div class="project-card">
-        <div class="project-num">PROJECT 06 · January 2022</div>
-        <div class="project-title">Virtual Keyboard using Computer Vision</div>
-        <div class="project-desc">
-       Developed a touchless virtual keyboard that enables users to type using hand gestures captured through a webcam.
-          The system leverages real-time computer vision techniques to detect finger movements and map them to keyboard inputs, eliminating the need for physical hardware.
-        </div>
-        <div class="project-tech">
-          <span class="tech-pill">Python</span>
-          <span class="tech-pill">OpenCV</span>
-          <span class="tech-pill">MediaPipe</span>
-          <span class="tech-pill">Computer Vision</span>
-        </div>
+      <div class="project-links">
+        <a href="https://github.com/harshala117" target="_blank" class="project-link">
+          ⎇ GitHub →
+        </a>
       </div>
     </div>
+
+    <div class="project-card">
+      <div style="font-family:'DM Mono',monospace;font-size:0.65rem;color:var(--muted);letter-spacing:0.1em;">Feb 2026</div>
+      <div class="project-title">AI Campus Assistant — Conversational AI System</div>
+      <div class="project-impact">Serverless · 0 EC2 instances · Auto-escalation to human agents</div>
+      <p class="project-desc">Serverless conversational assistant using Amazon Bedrock, Lambda, API Gateway, and S3. Handles campus dining, events, and parking queries with query routing and AI-to-human escalation.</p>
+      <div class="project-tags">
+        <span class="tag">Amazon Bedrock</span>
+        <span class="tag">AWS Lambda</span>
+        <span class="tag">API Gateway</span>
+        <span class="tag">S3</span>
+      </div>
+      <div class="project-links">
+        <a href="https://github.com/harshala117" target="_blank" class="project-link">⎇ GitHub →</a>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <div style="font-family:'DM Mono',monospace;font-size:0.65rem;color:var(--muted);letter-spacing:0.1em;">Sep 2025</div>
+      <div class="project-title">Wild Rydes — Cloud-Native Ride Sharing App</div>
+      <div class="project-impact">95%+ test coverage · Zero-trust security via JWT + IAM</div>
+      <p class="project-desc">Fully serverless platform on AWS with React frontend. Eliminated EC2 dependency and enforced zero-trust security via JWT and IAM across all Lambda functions and API endpoints.</p>
+      <div class="project-tags">
+        <span class="tag">AWS Lambda</span>
+        <span class="tag">Cognito</span>
+        <span class="tag">DynamoDB</span>
+        <span class="tag">React</span>
+        <span class="tag">JWT / IAM</span>
+      </div>
+      <div class="project-links">
+        <a href="https://github.com/harshala117" target="_blank" class="project-link">⎇ GitHub →</a>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <div style="font-family:'DM Mono',monospace;font-size:0.65rem;color:var(--muted);letter-spacing:0.1em;">Nov 2025</div>
+      <div class="project-title">Gym Database Management System</div>
+      <div class="project-impact">Normalized schema · Optimized for high-load queries</div>
+      <p class="project-desc">Full-stack web app for a multi-entity gym management system supporting memberships, payments, and trainer management with a normalized PostgreSQL schema optimized for performance.</p>
+      <div class="project-tags">
+        <span class="tag">JavaScript</span>
+        <span class="tag">PostgreSQL</span>
+        <span class="tag">Node.js</span>
+        <span class="tag">Schema Design</span>
+      </div>
+      <div class="project-links">
+        <a href="https://github.com/harshala117" target="_blank" class="project-link">⎇ GitHub →</a>
+      </div>
+    </div>
+
   </div>
 </section>
 
 <!-- CERTIFICATIONS -->
-<section id="certs">
-  <div class="section-wrap">
-    <div class="section-label">// 05 — Credentials</div>
-    <h2 class="section-title"><span class="underline-accent">Certifications</span></h2>
+<section id="certs" class="fade-up">
+  <div class="section-label">05 — Credentials</div>
+  <h2>Certifications</h2>
+  <div class="certs-grid">
 
-    <div class="certs-grid">
-      <div class="cert-card">
-        <div class="cert-icon">☁️</div>
-        <div>
-          <div class="cert-name">AWS Solutions Architect</div>
-          <div class="cert-issuer">Amazon Web Services</div>
-        </div>
-      </div>
-      <div class="cert-card">
-        <div class="cert-icon">🤖</div>
-        <div>
-          <div class="cert-name">AWS Machine Learning</div>
-          <div class="cert-issuer">Amazon Web Services</div>
-        </div>
-      </div>
-      <div class="cert-card">
-        <div class="cert-icon">✦</div>
-        <div>
-          <div class="cert-name">AWS AI Practitioner</div>
-          <div class="cert-issuer">Amazon Web Services</div>
-        </div>
-      </div>
-      <div class="cert-card">
-        <div class="cert-icon">⚙️</div>
-        <div>
-          <div class="cert-name">Linux Foundation</div>
-          <div class="cert-issuer"></div>
-        </div>
-      </div>
-      <div class="cert-card">
-        <div class="cert-icon">🐍</div>
-        <div>
-          <div class="cert-name">Python for Data Science</div>
-          <div class="cert-issuer">Coursera</div>
-        </div>
-      </div>
-      <div class="cert-card">
-        <div class="cert-icon">◈</div>
-        <div>
-          <div class="cert-name">UI/UX Certified</div>
-          <div class="cert-issuer">Industry Certification</div>
+    <div class="cert-card">
+      <div class="cert-icon">☁️</div>
+      <div class="cert-info">
+        <div class="cert-name">AWS Solutions Architect – Associate</div>
+        <div class="cert-issuer">Amazon Web Services</div>
+        <div class="cert-meta">
+          <span class="cert-year">2024</span>
+          <a href="https://aws.amazon.com/certification/" target="_blank" class="cert-verify">↗ Verify</a>
         </div>
       </div>
     </div>
+
+    <div class="cert-card">
+      <div class="cert-icon">🤖</div>
+      <div class="cert-info">
+        <div class="cert-name">AWS Certified Machine Learning – Specialty</div>
+        <div class="cert-issuer">Amazon Web Services</div>
+        <div class="cert-meta">
+          <span class="cert-year">2024</span>
+          <a href="https://aws.amazon.com/certification/" target="_blank" class="cert-verify">↗ Verify</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="cert-card">
+      <div class="cert-icon">✦</div>
+      <div class="cert-info">
+        <div class="cert-name">AWS Certified AI Practitioner</div>
+        <div class="cert-issuer">Amazon Web Services</div>
+        <div class="cert-meta">
+          <span class="cert-year">2024</span>
+          <a href="https://aws.amazon.com/certification/" target="_blank" class="cert-verify">↗ Verify</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="cert-card">
+      <div class="cert-icon">⚙️</div>
+      <div class="cert-info">
+        <div class="cert-name">Linux Foundation Certified System Administrator</div>
+        <div class="cert-issuer">The Linux Foundation</div>
+        <div class="cert-meta">
+          <span class="cert-year">2023</span>
+          <a href="https://training.linuxfoundation.org/certification/lfcs/" target="_blank" class="cert-verify">↗ Verify</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="cert-card">
+      <div class="cert-icon">🐍</div>
+      <div class="cert-info">
+        <div class="cert-name">Python for Data Science, AI & Development</div>
+        <div class="cert-issuer">Coursera / IBM</div>
+        <div class="cert-meta">
+          <span class="cert-year">2023</span>
+          <a href="https://www.coursera.org/" target="_blank" class="cert-verify">↗ Verify</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="cert-card">
+      <div class="cert-icon">◈</div>
+      <div class="cert-info">
+        <div class="cert-name">Google UX Design Certificate</div>
+        <div class="cert-issuer">Google / Coursera</div>
+        <div class="cert-meta">
+          <span class="cert-year">2023</span>
+          <a href="https://www.coursera.org/professional-certificates/google-ux-design" target="_blank" class="cert-verify">↗ Verify</a>
+        </div>
+      </div>
+    </div>
+
   </div>
 </section>
 
 <!-- EDUCATION -->
-<section id="education">
-  <div class="section-wrap">
-    <div class="section-label">// 06 — Education</div>
-    <h2 class="section-title"><span class="underline-accent">Academic Background</span></h2>
+<section id="education" class="fade-up">
+  <div class="section-label">06 — Education</div>
+  <h2>Academic Background</h2>
+  <div class="edu-grid">
 
-    <div class="edu-grid">
-      <div class="edu-card reveal">
-        <div class="edu-degree">Master of Science</div>
-        <div class="edu-field">Information Technology &amp; Management</div>
-        <div class="edu-school">University of Texas at Dallas</div>
-        <div class="edu-meta">Aug 2024 — May 2026 · Dallas, TX</div>
-        <div class="edu-topics">Cloud Computing · AWS Architecture · AI Systems</div>
-      </div>
-      <div class="edu-card reveal">
-        <div class="edu-degree">Bachelor of Computer Applications</div>
-        <div class="edu-field">Computer Science</div>
-        <div class="edu-school">Amity University, Mumbai</div>
-        <div class="edu-meta">Aug 2019 — Aug 2022 · Navi Mumbai, India</div>
-        <div class="edu-topics">Data Structures · Algorithms · Software Engineering</div>
+    <div class="edu-card">
+      <div class="edu-degree">Master of Science</div>
+      <div class="edu-field">Information Technology &amp; Management</div>
+      <div class="edu-school">University of Texas at Dallas</div>
+      <div class="edu-meta">Aug 2024 — May 2026 · Dallas, TX</div>
+      <div class="edu-courses">
+        <span class="tag">Cloud Computing</span>
+        <span class="tag green">AWS Architecture</span>
+        <span class="tag green">AI Systems</span>
       </div>
     </div>
+
+    <div class="edu-card">
+      <div class="edu-degree">Bachelor of Computer Applications</div>
+      <div class="edu-field">Computer Science</div>
+      <div class="edu-school">Amity University, Mumbai</div>
+      <div class="edu-meta">Aug 2019 — Aug 2022 · Navi Mumbai, India</div>
+      <div class="edu-courses">
+        <span class="tag">Data Structures</span>
+        <span class="tag">Algorithms</span>
+        <span class="tag">Software Engineering</span>
+      </div>
+    </div>
+
   </div>
 </section>
 
 <!-- CONTACT -->
-<section id="contact">
-  <div class="section-wrap">
-    <div class="section-label">// 07 — Contact</div>
-    <div class="contact-inner">
-      <div class="contact-heading reveal">
-        <h2>Let's<br><span>work</span><br>together.</h2>
-        <p>Open to full-time roles, internships, and interesting projects in cloud engineering, full-stack development, or AI/ML systems.</p>
-      </div>
-      <div class="contact-links reveal">
-        <a href="mailto:pawarharshala080@gmail.com" class="contact-link">
-          <div class="contact-link-icon">✉</div>
-          <div>
-            <div class="contact-link-label">Email</div>
-            <div class="contact-link-value">pawarharshala080@gmail.com</div>
-          </div>
-        </a>
-       
-        <a href="https://www.linkedin.com/in/harshalapawar" target="_blank" rel="noopener" class="contact-link">
-          <div class="contact-link-icon">in</div>
-          <div>
-            <div class="contact-link-label">LinkedIn</div>
-            <div class="contact-link-value">linkedin.com/in/harshalapawar</div>
-          </div>
-        </a>
-        <a href="https://github.com/harshalapawar" target="_blank" rel="noopener" class="contact-link">
-          <div class="contact-link-icon">gh</div>
-          <div>
-            <div class="contact-link-label">GitHub</div>
-            <div class="contact-link-value">github.com/harshalapawar</div>
-          </div>
-        </a>
-      </div>
+<section id="contact" class="fade-up">
+  <div class="contact-wrapper">
+    <div class="section-label" style="justify-content:center;">07 — Contact</div>
+    <h2>Let's work together.</h2>
+    <p class="contact-sub">Open to full-time roles starting May 2026 in cloud engineering, full-stack development, or AI/ML systems. Based in Dallas, TX — open to remote.</p>
+    <div class="contact-links">
+      <a href="mailto:pawarharshala080@gmail.com" class="contact-link">
+        <span class="contact-link-icon">✉</span>
+        pawarharshala080@gmail.com
+      </a>
+      <a href="https://www.linkedin.com/in/harshalapawar" target="_blank" class="contact-link">
+        <span class="contact-link-icon">in</span>
+        linkedin.com/in/harshalapawar
+      </a>
+      <a href="https://github.com/harshalapawar" target="_blank" class="contact-link">
+        <span class="contact-link-icon">⎇</span>
+        github.com/harshalapawar
+      </a>
+      <a href="resume.pdf" download class="contact-link" style="border-color:rgba(99,179,237,0.3);color:var(--accent);">
+        <span class="contact-link-icon">↓</span>
+        Download Resume
+      </a>
     </div>
   </div>
 </section>
 
 <!-- FOOTER -->
 <footer>
-  <div>© 2026 Harshala Pawar</div>
-  <div>HTML · CSS · JavaScript — GitHub Pages</div>
-  <div>Dallas, TX</div>
+  <span>© 2026 Harshala Pawar · Dallas, TX</span>
+  <div class="footer-links">
+    <a href="mailto:pawarharshala080@gmail.com">Email</a>
+    <a href="https://www.linkedin.com/in/harshalapawar" target="_blank">LinkedIn</a>
+    <a href="https://github.com/harshalapawar" target="_blank">GitHub</a>
+    <a href="resume.pdf" download>Resume</a>
+  </div>
 </footer>
 
-<script src="script.js"></script>
+<script>
+  // Scroll-triggered fade-up animations
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+  // Active nav link highlighting
+  const sections = document.querySelectorAll('section[id]');
+  const navLinks = document.querySelectorAll('.nav-links a');
+
+  window.addEventListener('scroll', () => {
+    let current = '';
+    sections.forEach(sec => {
+      if (window.scrollY >= sec.offsetTop - 120) {
+        current = sec.getAttribute('id');
+      }
+    });
+    navLinks.forEach(link => {
+      link.style.color = link.getAttribute('href') === `#${current}` ? 'var(--text)' : '';
+    });
+  });
+</script>
 </body>
 </html>
